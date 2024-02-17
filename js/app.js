@@ -81,6 +81,13 @@ loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
 
 
 
+loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
+    const dressingTable = gltf.scene;
+    dressingTable.scale.set(1.5, 1.5, 1.5);
+   dressingTable.rotation.y = (Math.PI/2);
+   dressingTable.position.set(6.7, 0, 1.5)
+    roomAndFurnitureGroup.add(dressingTable); 
+});
 
 
 
