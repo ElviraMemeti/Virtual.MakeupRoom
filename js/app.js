@@ -79,6 +79,7 @@ loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
     roomAndFurnitureGroup.add(dressingTable); 
 });
 
+// hjgwnnnnnn
 
 
 loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
