@@ -79,7 +79,7 @@ loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
     roomAndFurnitureGroup.add(dressingTable); 
 });
 
-// hjgwnnnnnn
+
 
 
 loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
@@ -110,7 +110,7 @@ directionalLight.position.set(5, 5, 5);
 // directionalLight.castShadow = true;
 // directionalLight.shadow.mapSize.width = 1024;
 // directionalLight.shadow.mapSize.height = 1024;
-directionalLight.position.set(10, 20, -20); 
+directionalLight.position.set(10, 20, 20); 
 directionalLight.target.position.set(0, 0, 0); 
 scene.add(directionalLight);
 
@@ -119,7 +119,10 @@ pointLight.position.set(-5, 20, -5); // Adjust the position of the point light
 pointLight.castShadow = true;
 scene.add(pointLight);
 
-
+const oppositePointLight = new THREE.PointLight(0xffffff, 1, 10);
+oppositePointLight.position.set(8, 20, 5); // Adjust the position of the point light
+oppositePointLight.castShadow = true;
+scene.add(oppositePointLight);
 
 
 
