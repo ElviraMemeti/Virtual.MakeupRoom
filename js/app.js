@@ -16,7 +16,7 @@ document.body.appendChild(renderer.domElement);
 renderer.gammaOutput = false;
 
 // Axes X,Y,Z
-const axesHelper = new THREE.AxesHelper(10); 
+const axesHelper = new THREE.AxesHelper(20); 
 scene.add(axesHelper);
 
 // Groups
@@ -43,6 +43,55 @@ loader.load('models/room/room.gltf', (gltf) => {
 });
 
 
+loader.load('models/longTable/longTable.gltf', (gltf) => {
+    const longTable = gltf.scene;
+    // longTable.traverse((child) => {
+    //     if (child.isMesh) {
+    //         const texture = new THREE.TextureLoader().load('textures/black.jpg');
+    //         //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    //         const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x000000 });
+    //         child.material = material;
+    //     }
+    // });
+
+
+    longTable.scale.set(0.5, 0.4, 1.2);
+   // longTable.rotation.y = (Math.PI/2);
+    longTable.position.set(-6.5, 0.7, -3)
+    roomAndFurnitureGroup.add(longTable); 
+});
+
+
+
+
+
+// loader.load('models/table/makeupTable.gltf', (gltf) => {
+//     const makeupTable = gltf.scene;
+  
+//     makeupTable.traverse((child) => {
+//         if (child.isMesh) {
+//             const texture = new THREE.TextureLoader().load('textures/grey.jpg');
+//             //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+//             const material = new THREE.MeshBasicMaterial({ map: texture});
+//             child.material = material;
+//         }
+//     });
+
+//     makeupTable.scale.set(1, 0.6, 1);
+//    makeupTable.rotation.y = (Math.PI/2);
+//    makeupTable.position.set(7.3, 0, -1)
+//     roomAndFurnitureGroup.add(makeupTable); 
+// });
+
+
+
+
+
+scene.add(roomAndFurnitureGroup);
+
+
+
+//-------------------lights------------------------------------------
 const ambientLight = new THREE.AmbientLight(0x404040, 5); // Increase intensity to 2
 scene.add(ambientLight);
 
@@ -61,7 +110,13 @@ pointLight.castShadow = true;
 scene.add(pointLight);
 
 
-// // OrbitControls for rotation
+
+
+
+
+
+
+// OrbitControls for rotation
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
@@ -69,26 +124,40 @@ controls.screenSpacePanning = false;
 controls.maxPolarAngle = Math.PI / 2;
 
 
+
+
+
 // Add event listener for keyboard input
 document.addEventListener('keydown', (event) => {
     const speed = 0.1; // Adjust the speed as needed
     switch (event.key) {
         case 'ArrowUp':
-            camera.position.z -= speed;
+            // Move the camera forward along the direction it's facing
+            camera.position.x -= Math.sin(camera.rotation.y) * speed;
+            camera.position.z -= Math.cos(camera.rotation.y) * speed;
             break;
         case 'ArrowDown':
-            camera.position.z += speed;
+            // Move the camera backward along the direction it's facing
+            camera.position.x += Math.sin(camera.rotation.y) * speed;
+            camera.position.z += Math.cos(camera.rotation.y) * speed;
             break;
         case 'ArrowLeft':
-            camera.position.x -= speed;
+            // Rotate the camera to the left
+            camera.rotation.y += 0.1;
             break;
         case 'ArrowRight':
-            camera.position.x += speed;
+            // Rotate the camera to the right
+            camera.rotation.y -= 0.1;
             break;
     }
 });
 
-// Animate function
+
+
+
+
+
+
 const animate = () => {
     requestAnimationFrame(animate);
 
