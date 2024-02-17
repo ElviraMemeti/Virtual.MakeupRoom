@@ -45,17 +45,7 @@ loader.load('models/room/room.gltf', (gltf) => {
 
 loader.load('models/longTable/longTable.gltf', (gltf) => {
     const longTable = gltf.scene;
-    // longTable.traverse((child) => {
-    //     if (child.isMesh) {
-    //         const texture = new THREE.TextureLoader().load('textures/black.jpg');
-    //         //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    //         const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x000000 });
-    //         child.material = material;
-    //     }
-    // });
-
-
-    longTable.scale.set(0.5, 0.4, 1.2);
+     longTable.scale.set(0.5, 0.4, 1.2);
    // longTable.rotation.y = (Math.PI/2);
     longTable.position.set(-6.5, 0.7, -3)
     roomAndFurnitureGroup.add(longTable); 
@@ -65,23 +55,7 @@ loader.load('models/longTable/longTable.gltf', (gltf) => {
 
 
 
-// loader.load('models/table/makeupTable.gltf', (gltf) => {
-//     const makeupTable = gltf.scene;
-  
-//     makeupTable.traverse((child) => {
-//         if (child.isMesh) {
-//             const texture = new THREE.TextureLoader().load('textures/grey.jpg');
-//             //texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-//             const material = new THREE.MeshBasicMaterial({ map: texture});
-//             child.material = material;
-//         }
-//     });
 
-//     makeupTable.scale.set(1, 0.6, 1);
-//    makeupTable.rotation.y = (Math.PI/2);
-//    makeupTable.position.set(7.3, 0, -1)
-//     roomAndFurnitureGroup.add(makeupTable); 
-// });
 
 
 
