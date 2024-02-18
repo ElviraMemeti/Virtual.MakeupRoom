@@ -114,7 +114,7 @@ loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
     const blankCanvas = gltf.scene;
     blankCanvas.scale.set(1, 0.8, 1);
     blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.2, -3.3)
+    blankCanvas.position.set(-6.5, 1.2, -3.2)
     roomAndFurnitureGroup.add(blankCanvas); 
 });
 
@@ -137,13 +137,77 @@ loader.load('models/makeup/6shadepalette/palette.gltf', (gltf) => {
     roomAndFurnitureGroup.add(shadepalette); 
 });
 
-// loader.load('models/makeup/tfLipstic/tfLiptstic.gltf', (gltf) => {
-//     const tfLiptstic = gltf.scene;
-//     tfLiptstic.scale.set(1, 1, 1);
-//    // tfLiptstic.rotation.y = (Math.PI/2);
-//     tfLiptstic.position.set(-6.5, 1.1, -6)
-//     roomAndFurnitureGroup.add(tfLiptstic); 
-// });
+loader.load('models/makeup/6shadepalette/palette.gltf', (gltf) => {
+    const shadepalette = gltf.scene;
+    shadepalette.scale.set(0.7, 0.3, 0.7);
+    shadepalette.rotation.y = (Math.PI/2);
+    shadepalette.position.set(-6.5, 1.2, -2)
+    roomAndFurnitureGroup.add(shadepalette); 
+});
+
+loader.load('models/makeup/foundation/foundation.gltf', (gltf) => {
+    const foundation = gltf.scene;
+    foundation.scale.set(0.5, 0.5, 0.5);
+    foundation.rotation.y = (Math.PI/2);
+    foundation.position.set(-6.5, 1.2, -1.5)
+    roomAndFurnitureGroup.add(foundation); 
+});
+
+loader.load('models/makeup/foundation/foundation.gltf', (gltf) => {
+    const foundation = gltf.scene;
+    foundation.scale.set(0.5, 0.5, 0.5);
+    foundation.rotation.y = (Math.PI/2);
+    foundation.position.set(-6.5, 1.2, -4.7)
+    roomAndFurnitureGroup.add(foundation); 
+});
+
+
+loader.load('models/makeup/lipstick/lipstick.gltf', (gltf) => {
+    const lipstick = gltf.scene;
+    lipstick.scale.set(0.5, 0.5, 0.5);
+    lipstick.rotation.y = (Math.PI/2);
+    lipstick.position.set(-6.3, 1.2, -4.6)
+    roomAndFurnitureGroup.add(lipstick); 
+});
+
+loader.load('models/makeup/lipstick/lipstick.gltf', (gltf) => {
+    const lipstick = gltf.scene;
+    lipstick.scale.set(0.5, 0.5, 0.5);
+    lipstick.rotation.y = (Math.PI/2);
+    lipstick.position.set(-6.3, 1.2, -1.4)
+    roomAndFurnitureGroup.add(lipstick); 
+});
+
+
+loader.load('models/makeup/palette/palette.gltf', (gltf) => {
+    const palette = gltf.scene;
+    palette.scale.set(0.2, 0.2, 0.2);
+   // palette.rotation.y = (Math.PI/2);
+    palette.position.set(-6.3, 1.2, -0.8)
+    roomAndFurnitureGroup.add(palette); 
+});
+
+
+loader.load('models/makeup/palette/palette.gltf', (gltf) => {
+    const palette = gltf.scene;
+    palette.scale.set(0.2, 0.2, 0.2);
+   // palette.rotation.y = (Math.PI/2);
+    palette.position.set(-6.3, 1.2, -4)
+    roomAndFurnitureGroup.add(palette); 
+});
+
+loader.load('models/makeup/glitterLipstic/glitterLipstic.gltf', (gltf) => {
+    const glitterLipstic = gltf.scene;
+    glitterLipstic.scale.set(0.5, 0.5, 0.5);
+   // glitterLipstic.rotation.y = (Math.PI/2);
+   glitterLipstic.position.set(-6.3, 1.2, -0.5)
+    roomAndFurnitureGroup.add(glitterLipstic); 
+});
+
+
+
+
+
 
 
 scene.add(roomAndFurnitureGroup);
