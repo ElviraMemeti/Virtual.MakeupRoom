@@ -106,7 +106,7 @@ loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
     const blankCanvas = gltf.scene;
     blankCanvas.scale.set(1, 0.8, 1);
     blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.1, 0.5)
+    blankCanvas.position.set(-6.5, 1.2, 0.5)
     roomAndFurnitureGroup.add(blankCanvas); 
 });
 
@@ -114,7 +114,7 @@ loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
     const blankCanvas = gltf.scene;
     blankCanvas.scale.set(1, 0.8, 1);
     blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.1, -3.3)
+    blankCanvas.position.set(-6.5, 1.2, -3.3)
     roomAndFurnitureGroup.add(blankCanvas); 
 });
 
@@ -123,11 +123,27 @@ loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
     const blankCanvas = gltf.scene;
     blankCanvas.scale.set(1, 0.8, 1);
     blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.1, -6.5)
+    blankCanvas.position.set(-6.5, 1.2, -6.5)
     roomAndFurnitureGroup.add(blankCanvas); 
 });
 
+// ------------------- makeup products----------------------------------------
 
+loader.load('models/makeup/6shadepalette/palette.gltf', (gltf) => {
+    const shadepalette = gltf.scene;
+    shadepalette.scale.set(0.7, 0.3, 0.7);
+    shadepalette.rotation.y = (Math.PI/2);
+    shadepalette.position.set(-6.5, 1.2, -5.2)
+    roomAndFurnitureGroup.add(shadepalette); 
+});
+
+// loader.load('models/makeup/tfLipstic/tfLiptstic.gltf', (gltf) => {
+//     const tfLiptstic = gltf.scene;
+//     tfLiptstic.scale.set(1, 1, 1);
+//    // tfLiptstic.rotation.y = (Math.PI/2);
+//     tfLiptstic.position.set(-6.5, 1.1, -6)
+//     roomAndFurnitureGroup.add(tfLiptstic); 
+// });
 
 
 scene.add(roomAndFurnitureGroup);
