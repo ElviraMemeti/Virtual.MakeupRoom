@@ -82,17 +82,50 @@ loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
 
 
 
-loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
-    const dressingTable = gltf.scene;
-    dressingTable.scale.set(1.5, 1.5, 1.5);
-   dressingTable.rotation.y = (Math.PI/2);
-   dressingTable.position.set(6.7, 0, 1.5)
-    roomAndFurnitureGroup.add(dressingTable); 
+
+loader.load('models/letters/letters.gltf', (gltf) => {
+    const letters = gltf.scene;
+
+    letters.traverse((child) => {
+        if (child.isMesh) {
+            
+            const texture = new THREE.TextureLoader().load('textures/black.jpg');
+            const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x333333 });
+            child.material = material;
+        }
+    });
+    letters.scale.set(0.5, 0.5, 0.5);
+    letters.rotation.y = (Math.PI/2);
+    letters.position.set(-7, 1.2, -2.3)
+    roomAndFurnitureGroup.add(letters); 
 });
 
 
 
+loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
+    const blankCanvas = gltf.scene;
+    blankCanvas.scale.set(1, 0.8, 1);
+    blankCanvas.rotation.y = (Math.PI/2);
+    blankCanvas.position.set(-6.5, 1.1, 0.5)
+    roomAndFurnitureGroup.add(blankCanvas); 
+});
 
+loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
+    const blankCanvas = gltf.scene;
+    blankCanvas.scale.set(1, 0.8, 1);
+    blankCanvas.rotation.y = (Math.PI/2);
+    blankCanvas.position.set(-6.5, 1.1, -3.3)
+    roomAndFurnitureGroup.add(blankCanvas); 
+});
+
+
+loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
+    const blankCanvas = gltf.scene;
+    blankCanvas.scale.set(1, 0.8, 1);
+    blankCanvas.rotation.y = (Math.PI/2);
+    blankCanvas.position.set(-6.5, 1.1, -6.5)
+    roomAndFurnitureGroup.add(blankCanvas); 
+});
 
 
 
@@ -105,7 +138,7 @@ scene.add(roomAndFurnitureGroup);
 const ambientLight = new THREE.AmbientLight(0x404040, 5); // Increase intensity to 2
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(5, 5, 5);
 // directionalLight.castShadow = true;
 // directionalLight.shadow.mapSize.width = 1024;
