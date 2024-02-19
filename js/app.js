@@ -90,6 +90,7 @@ textureLoader.load('/textures/woodflor.avif', function (texture) {
   color: 0xffff00, 
   side: THREE.DoubleSide
 });
+
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 plane.rotation.x = -Math.PI / 2;
 plane.scale.set(1.55, 0.9, 1.2);
@@ -108,95 +109,172 @@ loader.load('models/room/.ceilingLight.gltf', (gltf) => {
 });
 
 
-loader.load('models/longTable/longTable.gltf', (gltf) => {
-    const longTable = gltf.scene;
-     longTable.scale.set(0.5, 0.4, 1.2);
-   // longTable.rotation.y = (Math.PI/2);
-    longTable.position.set(-6.5, 0.7, -3)
-    roomAndFurnitureGroup.add(longTable); 
-});
 
-
-
-// loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
-//     const dressingTable = gltf.scene;
-//     dressingTable.scale.set(1.5, 1.5, 1.5);
-//    dressingTable.rotation.y = (Math.PI/2);
-//    dressingTable.position.set(6.7, 0, -4.5)
-//     roomAndFurnitureGroup.add(dressingTable); 
+//Comment the long table out------------------------------
+// loader.load('models/longTable/longTable.gltf', (gltf) => {
+//     const longTable = gltf.scene;
+//      longTable.scale.set(0.5, 0.4, 1.2);
+//    // longTable.rotation.y = (Math.PI/2);
+//     longTable.position.set(-6.5, 0.7, -3)
+//     roomAndFurnitureGroup.add(longTable); 
 // });
 
 
-// loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
-//     const dressingTable = gltf.scene;
-//     dressingTable.scale.set(1.5, 1.5, 1.5);
-//    dressingTable.rotation.y = (Math.PI/2);
-//    dressingTable.position.set(6.7, 0, -1.5)
-//     roomAndFurnitureGroup.add(dressingTable); 
-// });
 
 
-// loader.load('models/dressingTable/dressingTable.gltf', (gltf) => {
-//     const dressingTable = gltf.scene;
-//     dressingTable.scale.set(1.5, 1.5, 1.5);
-//    dressingTable.rotation.y = (Math.PI/2);
-//    dressingTable.position.set(6.7, 0, 1.5)
-//     roomAndFurnitureGroup.add(dressingTable); 
-// });
 
 
 let woodenTexture = new THREE.TextureLoader();
  woodenTexture=textureLoader.load('/textures/woodTexture.jpg');
+// Create a CubeTextureLoader
+const cubeTextureLoader = new THREE.CubeTextureLoader();
 
-loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
-    const longmirror = gltf.scene;
-    longmirror.scale.set(1.3, 0.92, 3);
-   longmirror.rotation.y = (Math.PI/-2);
-  //  longmirror.rotation.x = (Math.PI/);
-
-   longmirror.position.set(7.74, 1.3, -3)
-    roomAndFurnitureGroup.add(longmirror); 
-
-    longmirror.traverse((child)=>{
-      if(child.isMesh && child.name=='Listones'){
-      
-        console.log('wood found');
-        child.material=new THREE.MeshStandardMaterial({color:0x000000});
-
-      } else {
-        console.log("wood not found");
-      }
+// Load the six images of the environment map
+cubeTextureLoader.load([
+    'mirrorImg/one.jpg', // positive x
+    'mirrorImg/two.jpg', // negative x
+    'mirrorImg/three.jpg', // positive y
+    'mirrorImg/four.jpg', // negative y
+    'mirrorImg/five.jpg', // positive z
+    'mirrorImg/six.jpg'  // negative z
+], (texture) => {
+    // Once all six images are loaded, create the mirror object
+    loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
+        const longmirror = gltf.scene;
+        longmirror.scale.set(1.3, 0.92, 3);
+        longmirror.rotation.y = Math.PI / -2;
+        longmirror.traverse((child) => {
+            if (child.isMesh && child.name === 'Listones') {
+                console.log('wood found');
+                // Create a mirror material with environment mapping
+                const mirrorMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xffffff, // White color for the mirror
+                    metalness: 1, // Fully metallic
+                    roughness: 0, // Completely smooth
+                    envMap: texture // Assign the loaded environment map
+                });
+                // Ensure the mirror reflects its surroundings accurately
+                mirrorMaterial.envMapIntensity = 1;
+                child.material = mirrorMaterial;
+            } else {
+                console.log("wood not found");
+            }
+        });
+        longmirror.position.set(7.74, 1.3, -3);
+        roomAndFurnitureGroup.add(longmirror);
     });
-    
+});
+
+// Your other code continues here...
+
+
+
+// Load the six images of the environment map
+cubeTextureLoader.load([
+    'mirrorImg/one.jpg', // positive x
+    'mirrorImg/two.jpg', // negative x
+    'mirrorImg/three.jpg', // positive y
+    'mirrorImg/four.jpg', // negative y
+    'mirrorImg/five.jpg', // positive z
+    'mirrorImg/six.jpg'  // negative z
+], (texture) => {
+    // Once all six images are loaded, create the mirror object
+    loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
+        const longmirror = gltf.scene;
+        longmirror.scale.set(1.3, 0.92, 3);
+        longmirror.rotation.y = Math.PI / -2;
+        longmirror.traverse((child) => {
+            if (child.isMesh && child.name === 'Listones') {
+                console.log('wood found');
+                // Create a mirror material with environment mapping
+                const mirrorMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xffffff, // White color for the mirror
+                    metalness: 1, // Fully metallic
+                    roughness: 0, // Completely smooth
+                    envMap: texture // Assign the loaded environment map
+                });
+                // Ensure the mirror reflects its surroundings accurately
+                mirrorMaterial.envMapIntensity = 1;
+                child.material = mirrorMaterial;
+            } else {
+                console.log("wood not found");
+            }
+        });
+        longmirror.position.set(7.74, 1.3, 3);
+        roomAndFurnitureGroup.add(longmirror);
+    });
+});
+
+//----------------------CODE FOR CHAIR
+loader.load('models/chair/chair.gltf', (gltf) => {
+  const chair = gltf.scene;
+  chair.scale.set(6, 3, 4);
+  chair.rotation.y = Math.PI / 2;
+
+  chair.position.set(3, 0, -2);
+
+  // Assuming the chair's material is a MeshStandardMaterial
+  chair.traverse((child) => {
+    if (child.isMesh) {
+      child.material.transparent = true;
+      child.material.opacity = 0.3; // Adjust the opacity as needed (0 is fully transparent, 1 is fully opaque)
+   
+   
+      child.material.color.set(0x888888);
+    }
+  });
+
+  roomAndFurnitureGroup.add(chair);
 });
 
 
-loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
-  const longmirror = gltf.scene;
-  longmirror.scale.set(1.3, 0.92, 3);
- longmirror.rotation.y = (Math.PI/-2);
- longmirror.traverse((child)=>{
-  if(child.isMesh && child.name=='Listones'){
-  
-    console.log('wood found');
-    child.material=new THREE.MeshStandardMaterial({color:0x000000});
 
-  } else {
-    console.log("wood not found");
-  }
-});
- longmirror.position.set(7.74, 1.3, 3)
-  roomAndFurnitureGroup.add(longmirror); 
-});
 
 loader.load('models/room/table.gltf', (gltf) => {
   const table = gltf.scene;
   table.scale.set(1.5, 1.5, 1.5);
- table.rotation.y = (Math.PI/-2);
+  table.rotation.y = Math.PI / -2;
+  table.position.set(-1.5, 0, -5);
 
- table.position.set(-1.5, 0, -5)
-  roomAndFurnitureGroup.add(table); 
+  // Traverse through all the children of the loaded table model
+  table.traverse((child) => {
+    if (child.isMesh) {
+      // Load the texture
+      const textureLoader = new THREE.TextureLoader();
+      const texture = textureLoader.load('textures/grey.jpg'); // Adjust the path to your grey texture file
+
+      // Create a material with the texture
+      const material = new THREE.MeshStandardMaterial({ map: texture });
+
+      // Assign the material to the mesh
+      child.material = material;
+    }
+  });
+
+  roomAndFurnitureGroup.add(table);
 });
+
+
+
+// loader.load('models/coffeTable/coffeTable.gltf', (gltf) => {
+//     const coffeTable = gltf.scene;
+//     coffeTable.scale.set(0.5, 0.5, 0.5);
+//     coffeTable.rotation.y = (Math.PI/-2);
+  
+//     coffeTable.position.set(-1.5, 0, -5.4)
+//     roomAndFurnitureGroup.add(coffeTable); 
+//   });
+
+  loader.load('models/coffeTable/flower.gltf', (gltf) => {
+    const flower = gltf.scene;
+    flower.scale.set(0.5, 0.5, 0.5);
+    flower.rotation.y = (Math.PI/-2);
+  
+    flower.position.set(-0.7, 1, -4.5)
+    roomAndFurnitureGroup.add(flower); 
+  });
+
+
 
 const plantsGroup=new THREE.Group();
 
@@ -255,6 +333,19 @@ loader.load('models/lamps/lamp.gltf', (gltf) => {
   
     scene.add(lamp); 
   });
+
+
+  loader.load('models/ceilingLight/ceilingLight.gltf', (gltf) => {
+    const ceilingLight = gltf.scene;
+    ceilingLight.scale.set(1.5, 1, 1.5);
+    ceilingLight.position.set(0, 3, 0)
+    ceilingLight.rotation.y = (Math.PI/3);
+  
+    scene.add(ceilingLight); 
+  });
+
+
+
   const spotLight=new THREE.SpotLight(0xFFFFFF,10,2,5,5);
   spotLight.position.set(5,1.5,5);
   // spotLight.rotation.y = (Math.PI/);
@@ -280,6 +371,8 @@ loader.load('models/lamps/lamp.gltf', (gltf) => {
   
   scene.add(windowLight);
 
+
+  //-------------------------Letters-Wall Decor-----------------------
 loader.load('models/letters/letters.gltf', (gltf) => {
     const letters = gltf.scene;
 
@@ -299,112 +392,183 @@ loader.load('models/letters/letters.gltf', (gltf) => {
 
 
 
-loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
-    const blankCanvas = gltf.scene;
-    blankCanvas.scale.set(1, 0.8, 1);
-    blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.2, 0.5)
-    roomAndFurnitureGroup.add(blankCanvas); 
-});
-
-loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
-    const blankCanvas = gltf.scene;
-    blankCanvas.scale.set(1, 0.8, 1);
-    blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.2, -3.2)
-    roomAndFurnitureGroup.add(blankCanvas); 
+//----------------Makeup Shelf----------------------------------------------
+loader.load('models/shelf1/shelf1.gltf', (gltf) => {
+  const shelf = gltf.scene;
+  shelf.scale.set(0.5, 0.6, 0.3);
+ shelf.rotation.y = (Math.PI/2);
+ shelf.position.set(-7, 0.01, 2)
+  roomAndFurnitureGroup.add(shelf); 
 });
 
 
-loader.load('models/blankcanvas/blankCanvas.gltf', (gltf) => {
+//-----------------Function for painting canvas--------------------------
+let canvasMaterial; // Define canvasMaterial variable outside
+
+
+loader.load('models/board/board.gltf', (gltf) => {
     const blankCanvas = gltf.scene;
-    blankCanvas.scale.set(1, 0.8, 1);
-    blankCanvas.rotation.y = (Math.PI/2);
-    blankCanvas.position.set(-6.5, 1.2, -6.5)
-    roomAndFurnitureGroup.add(blankCanvas); 
+
+    
+    blankCanvas.traverse((child) => {
+        if (child.isMesh) {
+            
+            canvasMaterial = child.material;
+        }
+    });
+
+    
+    if (!canvasMaterial) {
+        console.error('Error: canvasMaterial is not assigned properly.');
+    }
+
+    blankCanvas.scale.set(0.4, 0.4, 0.4);
+    blankCanvas.position.set(-6, 0, 0.2);
+    blankCanvas.rotation.y = (Math.PI/4);
+
+    roomAndFurnitureGroup.add(blankCanvas);
 });
+
+
+
+
+// Function to change canvas color
+const changeCanvasColor = (color) => {
+  canvasMaterial.color.set(color);
+};
+
+const handleMakeupModelClick = (color) => {
+  changeCanvasColor(color);
+};
+
+
+// Raycaster setup
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// Event listener for mouse clicks
+// Event listener for mouse clicks
+document.addEventListener('click', onMouseClick);
+
+function onMouseClick(event) {
+    // Calculate mouse position
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Raycasting
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    // Check for intersection with makeup models
+    for (let i = 0; i < intersects.length; i++) {
+        const object = intersects[i].object;
+        if (object.userData.isMakeupModel) {
+            // Handle makeup model click
+            handleMakeupModelClick(object.userData.color);
+            break; // Exit loop after handling the first makeup model click
+        }
+    }
+}
+
 
 // ------------------- makeup products----------------------------------------
 
-loader.load('models/makeup/6shadepalette/palette.gltf', (gltf) => {
-    const shadepalette = gltf.scene;
-    shadepalette.scale.set(0.7, 0.3, 0.7);
-    shadepalette.rotation.y = (Math.PI/2);
-    shadepalette.position.set(-6.5, 1.2, -5.2)
-    roomAndFurnitureGroup.add(shadepalette); 
-});
-
-loader.load('models/makeup/6shadepalette/palette.gltf', (gltf) => {
-    const shadepalette = gltf.scene;
-    shadepalette.scale.set(0.7, 0.3, 0.7);
-    shadepalette.rotation.y = (Math.PI/2);
-    shadepalette.position.set(-6.5, 1.2, -2)
-    roomAndFurnitureGroup.add(shadepalette); 
-});
-
-loader.load('models/makeup/foundation/foundation.gltf', (gltf) => {
-    const foundation = gltf.scene;
-    foundation.scale.set(0.5, 0.5, 0.5);
-    foundation.rotation.y = (Math.PI/2);
-    foundation.position.set(-6.5, 1.2, -1.5)
-    roomAndFurnitureGroup.add(foundation); 
-});
-
-loader.load('models/makeup/foundation/foundation.gltf', (gltf) => {
-    const foundation = gltf.scene;
-    foundation.scale.set(0.5, 0.5, 0.5);
-    foundation.rotation.y = (Math.PI/2);
-    foundation.position.set(-6.5, 1.2, -4.7)
-    roomAndFurnitureGroup.add(foundation); 
-});
-
 
 loader.load('models/makeup/lipstick/lipstick.gltf', (gltf) => {
-    const lipstick = gltf.scene;
-    lipstick.scale.set(0.5, 0.5, 0.5);
-    lipstick.rotation.y = (Math.PI/2);
-    lipstick.position.set(-6.3, 1.2, -4.6)
-    roomAndFurnitureGroup.add(lipstick); 
+  const lipstick = gltf.scene;
+  lipstick.userData.isMakeupModel = true;
+  lipstick.userData.color = 0xff0000; // Red color
+  lipstick.scale.set(0.7, 0.7, 0.7);
+  lipstick.rotation.y = Math.PI / 2;
+  lipstick.position.set(-6.8, 1.2, 1.2);
+  scene.add(lipstick);
 });
 
-loader.load('models/makeup/lipstick/lipstick.gltf', (gltf) => {
-    const lipstick = gltf.scene;
-    lipstick.scale.set(0.5, 0.5, 0.5);
-    lipstick.rotation.y = (Math.PI/2);
-    lipstick.position.set(-6.3, 1.2, -1.4)
-    roomAndFurnitureGroup.add(lipstick); 
-});
-
-
-loader.load('models/makeup/palette/palette.gltf', (gltf) => {
-    const palette = gltf.scene;
-    palette.scale.set(0.2, 0.2, 0.2);
-   // palette.rotation.y = (Math.PI/2);
-    palette.position.set(-6.3, 1.2, -0.8)
-    roomAndFurnitureGroup.add(palette); 
+loader.load('models/makeup/chanel/chanel.gltf', (gltf) => {
+  const chanel = gltf.scene;
+  chanel.userData.isMakeupModel = true;
+  chanel.userData.color = 0xf5f5dc; // Beige color
+  chanel.scale.set(0.4, 0.5, 0.5);
+  chanel.position.set(-6.8, 0.3, 2.5);
+  chanel.rotation.y = (Math.PI/2);
+  scene.add(chanel); 
+   
 });
 
 
-loader.load('models/makeup/palette/palette.gltf', (gltf) => {
-    const palette = gltf.scene;
-    palette.scale.set(0.2, 0.2, 0.2);
-   // palette.rotation.y = (Math.PI/2);
-    palette.position.set(-6.3, 1.2, -4)
-    roomAndFurnitureGroup.add(palette); 
-});
 
-loader.load('models/makeup/glitterLipstic/glitterLipstic.gltf', (gltf) => {
-    const glitterLipstic = gltf.scene;
-    glitterLipstic.scale.set(0.5, 0.5, 0.5);
-   // glitterLipstic.rotation.y = (Math.PI/2);
-   glitterLipstic.position.set(-6.3, 1.2, -0.5)
-    roomAndFurnitureGroup.add(glitterLipstic); 
+loader.load('models/makeup/gorgioarmani/gorgioarmani.gltf', (gltf) => {
+  const gorgioarmani = gltf.scene;
+  // gorgioarmani.onClick = handleMakeupModelClick(0x8b4513);
+  gorgioarmani.scale.set(0.07, 0.08, 0.1);
+  gorgioarmani.position.set(-6.7, 0.8, 2.3);
+ //gorgioarmani.rotation.y = (Math.PI/2);
+ scene.add(gorgioarmani); 
 });
 
 
 
 
 
+loader.load('models/makeup/tfLipstic/tfLipstic.gltf', (gltf) => {
+  const tfLipstic = gltf.scene;
+  tfLipstic.userData.isMakeupModel = true;
+  tfLipstic.userData.color = 0x8b4513;
+  tfLipstic.scale.set(0.15, 0.15, 0.15);
+  tfLipstic.position.set(-6.8, 1.5, 2.4);
+  tfLipstic.rotation.y = (Math.PI/2);
+  scene.add(tfLipstic); 
+  
+});
+
+loader.load('models/makeup/lipstick1/lipstick1.gltf', (gltf) => {
+  const lipstick1 = gltf.scene;
+  //lipstick1.onClick = handleMakeupModelClick(0x8b4513);
+  lipstick1.scale.set(0.4, 0.4, 0.4);
+  lipstick1.position.set(-6.8, 0.1, 1.55);
+  lipstick1.rotation.y = (Math.PI/2);
+  scene.add(lipstick1); 
+});
+
+
+
+//-------------------------people----------------------
+
+loader.load('models/makeupArtist/makeupArtist.gltf', (gltf) => {
+  const makeupArtist = gltf.scene;
+  makeupArtist.scale.set(1.2, 1.2, 1.2);
+  makeupArtist.position.set(-6.7, 0, 3.5);
+  makeupArtist.rotation.y = (Math.PI/2);
+  scene.add(makeupArtist); 
+});
+
+
+
+
+
+
+//-------------------------room----------------------------------------
+
+loader.load('models/photoroom/photoroom.gltf', (gltf) => {
+  const photoroom = gltf.scene;
+  photoroom.scale.set(0.5, 0.5, 0.3);
+  photoroom.position.set(-11.5, 0, 4.8);
+  photoroom.rotation.y = (Math.PI);
+  scene.add(photoroom); 
+  
+});
+
+
+
+//-------------DEcor-------------------------------
+loader.load('models/carpet/carpet.gltf', (gltf) => {
+  const carpet = gltf.scene;
+  carpet.scale.set(1.5, 1.5, 1.5);
+  carpet.position.set(-1, 0, -5);
+  carpet.rotation.y = (Math.PI);
+  scene.add(carpet); 
+  
+});
 
 
 scene.add(roomAndFurnitureGroup);
