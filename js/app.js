@@ -267,10 +267,10 @@ loader.load('models/room/table.gltf', (gltf) => {
 
   loader.load('models/coffeTable/flower.gltf', (gltf) => {
     const flower = gltf.scene;
-    flower.scale.set(0.5, 0.5, 0.5);
+    flower.scale.set(0.3, 0.3, 0.3);
     flower.rotation.y = (Math.PI/-2);
   
-    flower.position.set(-0.7, 1, -4.5)
+    flower.position.set(0.2, 0.4, -5)
     roomAndFurnitureGroup.add(flower); 
   });
 
