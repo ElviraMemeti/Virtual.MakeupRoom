@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 
 
 
@@ -124,225 +125,218 @@ loader.load('models/room/.ceilingLight.gltf', (gltf) => {
 
 
 
-let woodenTexture = new THREE.TextureLoader();
- woodenTexture=textureLoader.load('/textures/woodTexture.jpg');
-// Create a CubeTextureLoader
-const cubeTextureLoader = new THREE.CubeTextureLoader();
+// let woodenTexture = new THREE.TextureLoader();
+//  woodenTexture=textureLoader.load('/textures/woodTexture.jpg');
+// // Create a CubeTextureLoader
+// const cubeTextureLoader = new THREE.CubeTextureLoader();
 
-// Load the six images of the environment map
-cubeTextureLoader.load([
-    'mirrorImg/one.jpg', // positive x
-    'mirrorImg/two.jpg', // negative x
-    'mirrorImg/three.jpg', // positive y
-    'mirrorImg/four.jpg', // negative y
-    'mirrorImg/five.jpg', // positive z
-    'mirrorImg/six.jpg'  // negative z
-], (texture) => {
-    // Once all six images are loaded, create the mirror object
-    loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
-        const longmirror = gltf.scene;
-        longmirror.scale.set(1.3, 0.92, 3);
-        longmirror.rotation.y = Math.PI / -2;
-        longmirror.traverse((child) => {
-            if (child.isMesh && child.name === 'Listones') {
-                console.log('wood found');
-                // Create a mirror material with environment mapping
-                const mirrorMaterial = new THREE.MeshStandardMaterial({
-                    color: 0xffffff, // White color for the mirror
-                    metalness: 1, // Fully metallic
-                    roughness: 0, // Completely smooth
-                    envMap: texture // Assign the loaded environment map
-                });
-                // Ensure the mirror reflects its surroundings accurately
-                mirrorMaterial.envMapIntensity = 1;
-                child.material = mirrorMaterial;
-            } else {
-                console.log("wood not found");
-            }
-        });
-        longmirror.position.set(7.74, 1.3, -3);
-        roomAndFurnitureGroup.add(longmirror);
-    });
-});
+// // Load the six images of the environment map
+// cubeTextureLoader.load([
+//     'mirrorImg/one.jpg', // positive x
+//     'mirrorImg/two.jpg', // negative x
+//     'mirrorImg/three.jpg', // positive y
+//     'mirrorImg/four.jpg', // negative y
+//     'mirrorImg/five.jpg', // positive z
+//     'mirrorImg/six.jpg'  // negative z
+// ], (texture) => {
+//     // Once all six images are loaded, create the mirror object
+//     loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
+//         const longmirror = gltf.scene;
+//         longmirror.scale.set(1.3, 0.92, 3);
+//         longmirror.rotation.y = Math.PI / -2;
+//         longmirror.traverse((child) => {
+//             if (child.isMesh && child.name === 'Listones') {
+//                 console.log('wood found');
+//                 // Create a mirror material with environment mapping
+//                 const mirrorMaterial = new THREE.MeshStandardMaterial({
+//                     color: 0xffffff, // White color for the mirror
+//                     metalness: 1, // Fully metallic
+//                     roughness: 0, // Completely smooth
+//                     envMap: texture // Assign the loaded environment map
+//                 });
+//                 // Ensure the mirror reflects its surroundings accurately
+//                 mirrorMaterial.envMapIntensity = 1;
+//                 child.material = mirrorMaterial;
+//             } else {
+//                 console.log("wood not found");
+//             }
+//         });
+//         longmirror.position.set(7.74, 1.3, -3);
+//         roomAndFurnitureGroup.add(longmirror);
+//     });
+// });
 
-// Your other code continues here...
+// // Your other code continues here...
 
 
 
-// Load the six images of the environment map
-cubeTextureLoader.load([
-    'mirrorImg/one.jpg', // positive x
-    'mirrorImg/two.jpg', // negative x
-    'mirrorImg/three.jpg', // positive y
-    'mirrorImg/four.jpg', // negative y
-    'mirrorImg/five.jpg', // positive z
-    'mirrorImg/six.jpg'  // negative z
-], (texture) => {
-    // Once all six images are loaded, create the mirror object
-    loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
-        const longmirror = gltf.scene;
-        longmirror.scale.set(1.3, 0.92, 3);
-        longmirror.rotation.y = Math.PI / -2;
-        longmirror.traverse((child) => {
-            if (child.isMesh && child.name === 'Listones') {
-                console.log('wood found');
-                // Create a mirror material with environment mapping
-                const mirrorMaterial = new THREE.MeshStandardMaterial({
-                    color: 0xffffff, // White color for the mirror
-                    metalness: 1, // Fully metallic
-                    roughness: 0, // Completely smooth
-                    envMap: texture // Assign the loaded environment map
-                });
-                // Ensure the mirror reflects its surroundings accurately
-                mirrorMaterial.envMapIntensity = 1;
-                child.material = mirrorMaterial;
-            } else {
-                console.log("wood not found");
-            }
-        });
-        longmirror.position.set(7.74, 1.3, 3);
-        roomAndFurnitureGroup.add(longmirror);
-    });
-});
+// // Load the six images of the environment map
+// cubeTextureLoader.load([
+//     'mirrorImg/one.jpg', // positive x
+//     'mirrorImg/two.jpg', // negative x
+//     'mirrorImg/three.jpg', // positive y
+//     'mirrorImg/four.jpg', // negative y
+//     'mirrorImg/five.jpg', // positive z
+//     'mirrorImg/six.jpg'  // negative z
+// ], (texture) => {
+//     // Once all six images are loaded, create the mirror object
+//     loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
+//         const longmirror = gltf.scene;
+//         longmirror.scale.set(1.3, 0.92, 3);
+//         longmirror.rotation.y = Math.PI / -2;
+//         longmirror.traverse((child) => {
+//             if (child.isMesh && child.name === 'Listones') {
+//                 console.log('wood found');
+//                 // Create a mirror material with environment mapping
+//                 const mirrorMaterial = new THREE.MeshStandardMaterial({
+//                     color: 0xffffff, // White color for the mirror
+//                     metalness: 1, // Fully metallic
+//                     roughness: 0, // Completely smooth
+//                     envMap: texture // Assign the loaded environment map
+//                 });
+//                 // Ensure the mirror reflects its surroundings accurately
+//                 mirrorMaterial.envMapIntensity = 1;
+//                 child.material = mirrorMaterial;
+//             } else {
+//                 console.log("wood not found");
+//             }
+//         });
+//         longmirror.position.set(7.74, 1.3, 3);
+//         roomAndFurnitureGroup.add(longmirror);
+//     });
+// });
 
-//----------------------CODE FOR CHAIR
-loader.load('models/chair/chair.gltf', (gltf) => {
-  const chair = gltf.scene;
-  chair.scale.set(6, 3, 4);
-  chair.rotation.y = Math.PI / 2;
+// //----------------------CODE FOR CHAIR
+// loader.load('models/chair/chair.gltf', (gltf) => {
+//   const chair = gltf.scene;
+//   chair.scale.set(6, 3, 4);
+//   chair.rotation.y = Math.PI / 2;
 
-  chair.position.set(3, 0, -2);
+//   chair.position.set(3, 0, -2);
 
-  // Assuming the chair's material is a MeshStandardMaterial
-  chair.traverse((child) => {
-    if (child.isMesh) {
-      child.material.transparent = true;
-      child.material.opacity = 0.3; // Adjust the opacity as needed (0 is fully transparent, 1 is fully opaque)
+//   // Assuming the chair's material is a MeshStandardMaterial
+//   chair.traverse((child) => {
+//     if (child.isMesh) {
+//       child.material.transparent = true;
+//       child.material.opacity = 0.3; // Adjust the opacity as needed (0 is fully transparent, 1 is fully opaque)
    
    
-      child.material.color.set(0x888888);
-    }
-  });
-
-  roomAndFurnitureGroup.add(chair);
-});
-
-
-
-
-loader.load('models/room/table.gltf', (gltf) => {
-  const table = gltf.scene;
-  table.scale.set(1.5, 1.5, 1.5);
-  table.rotation.y = Math.PI / -2;
-  table.position.set(-1.5, 0, -5);
-
-  // Traverse through all the children of the loaded table model
-  table.traverse((child) => {
-    if (child.isMesh) {
-      // Load the texture
-      const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load('textures/grey.jpg'); // Adjust the path to your grey texture file
-
-      // Create a material with the texture
-      const material = new THREE.MeshStandardMaterial({ map: texture });
-
-      // Assign the material to the mesh
-      child.material = material;
-    }
-  });
-
-  roomAndFurnitureGroup.add(table);
-});
-
-
-
-// loader.load('models/coffeTable/coffeTable.gltf', (gltf) => {
-//     const coffeTable = gltf.scene;
-//     coffeTable.scale.set(0.5, 0.5, 0.5);
-//     coffeTable.rotation.y = (Math.PI/-2);
-  
-//     coffeTable.position.set(-1.5, 0, -5.4)
-//     roomAndFurnitureGroup.add(coffeTable); 
+//       child.material.color.set(0x888888);
+//     }
 //   });
 
-  loader.load('models/coffeTable/flower.gltf', (gltf) => {
-    const flower = gltf.scene;
-    flower.scale.set(0.3, 0.3, 0.3);
-    flower.rotation.y = (Math.PI/-2);
+//   roomAndFurnitureGroup.add(chair);
+// });
+
+
+
+
+// loader.load('models/room/table.gltf', (gltf) => {
+//   const table = gltf.scene;
+//   table.scale.set(1.5, 1.5, 1.5);
+//   table.rotation.y = Math.PI / -2;
+//   table.position.set(-1.5, 0, -5);
+
+//   // Traverse through all the children of the loaded table model
+//   table.traverse((child) => {
+//     if (child.isMesh) {
+//       // Load the texture
+//       const textureLoader = new THREE.TextureLoader();
+//       const texture = textureLoader.load('textures/grey.jpg'); // Adjust the path to your grey texture file
+
+//       // Create a material with the texture
+//       const material = new THREE.MeshStandardMaterial({ map: texture });
+
+//       // Assign the material to the mesh
+//       child.material = material;
+//     }
+//   });
+
+//   roomAndFurnitureGroup.add(table);
+// });
+
+
+
+// // loader.load('models/coffeTable/coffeTable.gltf', (gltf) => {
+// //     const coffeTable = gltf.scene;
+// //     coffeTable.scale.set(0.5, 0.5, 0.5);
+// //     coffeTable.rotation.y = (Math.PI/-2);
   
-    flower.position.set(0.2, 0.4, -5)
-    roomAndFurnitureGroup.add(flower); 
-  });
+// //     coffeTable.position.set(-1.5, 0, -5.4)
+// //     roomAndFurnitureGroup.add(coffeTable); 
+// //   });
+
+//   loader.load('models/coffeTable/flower.gltf', (gltf) => {
+//     const flower = gltf.scene;
+//     flower.scale.set(0.3, 0.3, 0.3);
+//     flower.rotation.y = (Math.PI/-2);
+  
+//     flower.position.set(0.2, 0.4, -5)
+//     roomAndFurnitureGroup.add(flower); 
+//   });
 
 
 
-const plantsGroup=new THREE.Group();
+// const plantsGroup=new THREE.Group();
 
-//plants
-loader.load('models/plants/aloePlant/scene.gltf', (gltf) => {
-    const aloeplant = gltf.scene;
-    aloeplant.scale.set(0.2, 0.2, 0.2 );
-    aloeplant.position.set(-5, 0, -6)
-    scene.add(aloeplant); 
-});
-loader.load('models/plants/pot.gltf', (gltf) => {
-    const flaskfilondreon = gltf.scene;
-    flaskfilondreon.scale.set(0.3, 0.3, 0.3 );
-    flaskfilondreon.position.set(-4.2, 0, -6.5)
-    scene.add(flaskfilondreon); 
-});
+// //plants
+// loader.load('models/plants/aloePlant/scene.gltf', (gltf) => {
+//     const aloeplant = gltf.scene;
+//     aloeplant.scale.set(0.2, 0.2, 0.2 );
+//     aloeplant.position.set(-5, 0, -6)
+//     scene.add(aloeplant); 
+// });
+// loader.load('models/plants/pot.gltf', (gltf) => {
+//     const flaskfilondreon = gltf.scene;
+//     flaskfilondreon.scale.set(0.3, 0.3, 0.3 );
+//     flaskfilondreon.position.set(-4.2, 0, -6.5)
+//     scene.add(flaskfilondreon); 
+// });
 
-loader.load('models/couch/SofaBaker.gltf', (gltf) => {
-    const couch = gltf.scene;
-    couch.scale.set(2.5, 2, 2 );
-    couch.position.set(-1, 0, -7)
-    scene.add(couch); 
+// loader.load('models/couch/SofaBaker.gltf', (gltf) => {
+//     const couch = gltf.scene;
+//     couch.scale.set(2.5, 2, 2 );
+//     couch.position.set(-1, 0, -7)
+//     scene.add(couch); 
 
-    couch.traverse(function (child) {
-        if (child.isMesh) {
-           child.material=new THREE.MeshStandardMaterial({map:BeanBagTexture});
-        }
-    }); 
-});
+//     couch.traverse(function (child) {
+//         if (child.isMesh) {
+//            child.material=new THREE.MeshStandardMaterial({map:BeanBagTexture});
+//         }
+//     }); 
+// });
 
-const bbTextureLoader = new THREE.TextureLoader();
-const BeanBagTexture=bbTextureLoader.load('/textures/beanBagTexture.jpg');
+// const bbTextureLoader = new THREE.TextureLoader();
+// const BeanBagTexture=bbTextureLoader.load('/textures/beanBagTexture.jpg');
 
-loader.load('models/couch/BeanBag.gltf', (gltf) => {
-    const beanBag = gltf.scene;
-    beanBag.scale.set(2.5, 2, 2 );
-    beanBag.position.set(-3, 0, -4)
-    scene.add(beanBag); 
-    beanBag.rotation.y = (Math.PI/1.5);
+// loader.load('models/couch/BeanBag.gltf', (gltf) => {
+//     const beanBag = gltf.scene;
+//     beanBag.scale.set(2.5, 2, 2 );
+//     beanBag.position.set(-3, 0, -4)
+//     scene.add(beanBag); 
+//     beanBag.rotation.y = (Math.PI/1.5);
     
 
-    beanBag.traverse(function (child) {
-        if (child.isMesh) {
-            child.material = new THREE.MeshStandardMaterial({ map: BeanBagTexture });
+//     beanBag.traverse(function (child) {
+//         if (child.isMesh) {
+//             child.material = new THREE.MeshStandardMaterial({ map: BeanBagTexture });
             
-        }
-    }); 
+//         }
+//     }); 
 
-});
+// });
 
-loader.load('models/lamps/lamp.gltf', (gltf) => {
-    const lamp = gltf.scene;
-    lamp.scale.set(1.5, 1.5, 1.5);
-    lamp.position.set(6.5, 0, 5)
-    lamp.rotation.y = (Math.PI/3);
+// loader.load('models/lamps/lamp.gltf', (gltf) => {
+//     const lamp = gltf.scene;
+//     lamp.scale.set(1.5, 1.5, 1.5);
+//     lamp.position.set(6.5, 0, 5)
+//     lamp.rotation.y = (Math.PI/3);
   
-    scene.add(lamp); 
-  });
+//     scene.add(lamp); 
+//   });
 
 
-  loader.load('models/ceilingLight/ceilingLight.gltf', (gltf) => {
-    const ceilingLight = gltf.scene;
-    ceilingLight.scale.set(1.5, 1, 1.5);
-    ceilingLight.position.set(0, 3, 0)
-    ceilingLight.rotation.y = (Math.PI/3);
-  
-    scene.add(ceilingLight); 
-  });
+
 
 
 
@@ -372,23 +366,23 @@ loader.load('models/lamps/lamp.gltf', (gltf) => {
   scene.add(windowLight);
 
 
-  //-------------------------Letters-Wall Decor-----------------------
-loader.load('models/letters/letters.gltf', (gltf) => {
-    const letters = gltf.scene;
+//   //-------------------------Letters-Wall Decor-----------------------
+// loader.load('models/letters/letters.gltf', (gltf) => {
+//     const letters = gltf.scene;
 
-    letters.traverse((child) => {
-        if (child.isMesh) {
+//     letters.traverse((child) => {
+//         if (child.isMesh) {
             
-            const texture = new THREE.TextureLoader().load('textures/black.jpg');
-            const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x333333 });
-            child.material = material;
-        }
-    });
-    letters.scale.set(0.5, 0.5, 0.5);
-    letters.rotation.y = (Math.PI/2);
-    letters.position.set(-7, 1.2, -2.3)
-    roomAndFurnitureGroup.add(letters); 
-});
+//             const texture = new THREE.TextureLoader().load('textures/black.jpg');
+//             const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x333333 });
+//             child.material = material;
+//         }
+//     });
+//     letters.scale.set(0.5, 0.5, 0.5);
+//     letters.rotation.y = (Math.PI/2);
+//     letters.position.set(-7, 1.2, -2.3)
+//     roomAndFurnitureGroup.add(letters); 
+// });
 
 
 
@@ -470,6 +464,22 @@ function onMouseClick(event) {
     }
 }
 
+//---------------FUNCTION FOR ONHOVER MAKEUP INFORMATION--------------------------
+const cssRenderer = new CSS2DRenderer();
+cssRenderer.setSize(window.innerWidth, window.innerHeight);
+cssRenderer.domElement.style.position = 'absolute';
+cssRenderer.domElement.style.top = '0';
+document.body.appendChild(cssRenderer.domElement);
+
+function createHoverText(text, position) {
+  const div = document.createElement('div');
+  div.className = 'hover-text';
+  div.textContent = text;
+
+  const label = new CSS2DObject(div);
+  label.position.copy(position);
+  return label;
+}
 
 // ------------------- makeup products----------------------------------------
 
@@ -482,6 +492,20 @@ loader.load('models/makeup/lipstick/lipstick.gltf', (gltf) => {
   lipstick.rotation.y = Math.PI / 2;
   lipstick.position.set(-6.8, 1.2, 1.2);
   scene.add(lipstick);
+
+  // Example for lipstick
+const lipstickHoverText = createHoverText('Lipstick description', lipstick.position);
+scene.add(lipstickHoverText);
+lipstick.userData.hoverText = lipstickHoverText; // Store the hover text object in the user data
+
+lipstick.addEventListener('mouseover', () => {
+    lipstickHoverText.visible = true;
+});
+
+lipstick.addEventListener('mouseout', () => {
+    lipstickHoverText.visible = false;
+});
+
 });
 
 loader.load('models/makeup/chanel/chanel.gltf', (gltf) => {
