@@ -21,7 +21,7 @@ document.body.appendChild(renderer.domElement);
 renderer.gammaOutput = false;
 
 // Axes X,Y,Z
-const axesHelper = new THREE.AxesHelper(20); 
+const axesHelper = new THREE.AxesHelper(30); 
 scene.add(axesHelper);
 
 // Groups
@@ -108,15 +108,6 @@ roomAndFurnitureGroup.add(planeGeometry);
 
 
 
-// Comment the long table out------------------------------
-loader.load('models/longTable/longTable.gltf', (gltf) => {
-    const longTable = gltf.scene;
-     longTable.scale.set(0.5, 0.4, 1.2);
-   // longTable.rotation.y = (Math.PI/2);
-    longTable.position.set(-6.5, 0.7, -3)
-    roomAndFurnitureGroup.add(longTable); 
-
-});
 
 
 
@@ -240,7 +231,7 @@ loader.load('models/room/table.gltf', (gltf) => {
     if (child.isMesh) {
       // Load the texture
       const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load('textures/grey.jpg'); // Adjust the path to your grey texture file
+      const texture = textureLoader.load('textures/darkwood.jpg'); // Adjust the path to your grey texture file
       // Create a material with the texture
       const material = new THREE.MeshStandardMaterial({ map: woodenTexture });
       // Assign the material to the mesh
@@ -266,14 +257,7 @@ scene.add( rectLight2 );
 
 
 
-// loader.load('models/coffeTable/coffeTable.gltf', (gltf) => {
-//     const coffeTable = gltf.scene;
-//     coffeTable.scale.set(0.5, 0.5, 0.5);
-//     coffeTable.rotation.y = (Math.PI/-2);
-  
-//     coffeTable.position.set(-1.5, 0, -5.4)
-//     roomAndFurnitureGroup.add(coffeTable); 
-//   });
+
 
   loader.load('models/coffeTable/flower.gltf', (gltf) => {
     const flower = gltf.scene;
@@ -371,22 +355,22 @@ loader.load('models/lamps/lamp.gltf', (gltf) => {
 
 
 //   //-------------------------Letters-Wall Decor-----------------------
-// loader.load('models/letters/letters.gltf', (gltf) => {
-//     const letters = gltf.scene;
+loader.load('models/letters/letters.gltf', (gltf) => {
+    const letters = gltf.scene;
 
-//     letters.traverse((child) => {
-//         if (child.isMesh) {
+    letters.traverse((child) => {
+        if (child.isMesh) {
             
-//             const texture = new THREE.TextureLoader().load('textures/black.jpg');
-//             const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x333333 });
-//             child.material = material;
-//         }
-//     });
-//     letters.scale.set(0.5, 0.5, 0.5);
-//     letters.rotation.y = (Math.PI/2);
-//     letters.position.set(-7, 1.2, -2.3)
-//     roomAndFurnitureGroup.add(letters); 
-// });
+            const texture = new THREE.TextureLoader().load('textures/black.jpg');
+            const material = new THREE.MeshBasicMaterial({ map: texture, color: 0x333333 });
+            child.material = material;
+        }
+    });
+    letters.scale.set(0.5, 0.5, 0.5);
+    letters.rotation.y = (Math.PI/2);
+    letters.position.set(-7, 1.2, -2.3)
+    roomAndFurnitureGroup.add(letters); 
+});
 
 
 
@@ -469,21 +453,7 @@ function onMouseClick(event) {
 }
 
 //---------------FUNCTION FOR ONHOVER MAKEUP INFORMATION--------------------------
-const cssRenderer = new CSS2DRenderer();
-cssRenderer.setSize(window.innerWidth, window.innerHeight);
-cssRenderer.domElement.style.position = 'absolute';
-cssRenderer.domElement.style.top = '0';
-document.body.appendChild(cssRenderer.domElement);
 
-function createHoverText(text, position) {
-  const div = document.createElement('div');
-  div.className = 'hover-text';
-  div.textContent = text;
-
-  const label = new CSS2DObject(div);
-  label.position.copy(position);
-  return label;
-}
 
 // ------------------- makeup products----------------------------------------
 
@@ -497,18 +467,7 @@ loader.load('models/makeup/lipstick/lipstick.gltf', (gltf) => {
   lipstick.position.set(-6.8, 1.2, 1.2);
   scene.add(lipstick);
 
-  // Example for lipstick
-const lipstickHoverText = createHoverText('Lipstick description', lipstick.position);
-scene.add(lipstickHoverText);
-lipstick.userData.hoverText = lipstickHoverText; // Store the hover text object in the user data
 
-lipstick.addEventListener('mouseover', () => {
-    lipstickHoverText.visible = true;
-});
-
-lipstick.addEventListener('mouseout', () => {
-    lipstickHoverText.visible = false;
-});
 
 });
 
@@ -657,6 +616,33 @@ document.addEventListener('keydown', (event) => {
             break;
     }
 });
+
+// Get the button element
+const toggleModeButton = document.getElementById('toggleModeButton');
+
+// Boolean flag to track the current mode (true for day mode, false for night mode)
+let isDayMode = true;
+
+// Function to toggle between day and night mode
+const toggleMode = () => {
+    // Toggle the mode flag
+    isDayMode = !isDayMode;
+
+    // Update scene elements based on the mode
+    if (isDayMode) {
+        // Day mode
+        scene.background = new THREE.Color(0xfff0ff); // White background
+        rectLight1.color.set(0xffffff); // White rect light color
+    } else {
+        // Night mode
+        scene.background = new THREE.Color(0x000000); // Black background
+        rectLight1.color.set(0xff0000); // Red rect light color
+    }
+};
+
+// Add click event listener to the button
+toggleModeButton.addEventListener('click', toggleMode);
+
 
 
 const animate = () => {

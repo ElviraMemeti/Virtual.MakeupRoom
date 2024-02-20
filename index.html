@@ -6,10 +6,28 @@
     <title>Virtual Makeup Room</title>
     <style>
         body { margin: 0; overflow: hidden; }
-        
+        #toggleModeButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: none; /* Remove the border */
+    border-radius: 20px; /* Increase the border-radius for more rounded edges */
+    cursor: pointer;
+    z-index: 9999; /* Ensure the button appears on top of other elements */
+    outline: none; /* Remove the outline when button is clicked */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    font-size: 25px; 
+}
+
+
     </style>
 </head>
 <body>
+    <button id="toggleModeButton"> Day/Night</button>
+
     <script type="module" src="js/app.js"></script>
     
 </body>
