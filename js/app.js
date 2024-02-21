@@ -54,84 +54,84 @@ rectLight1.castShadow = true;
 
 const loader = new GLTFLoader();
 
-// const roofTexture=textureLoader.load('/textures/rooftexture.jpeg');
-// const roofGeometry = new THREE.ConeGeometry(13, 7, 4);
-// const roofMaterial = new THREE.MeshStandardMaterial({map:roofTexture});
-// roofTexture.wrapS = THREE.MirroredRepeatWrapping;
-// roofTexture.wrapT = THREE.MirroredRepeatWrapping;
-// roofTexture.repeat.set(5, 5);
-// const roof = new THREE.Mesh(roofGeometry, roofMaterial);
-// roof.rotation.y = -Math.PI / 4; 
-// roof.position.y = 8.9;
-// roof.position.z=-2;
-// scene.add(roof);
+const roofTexture=textureLoader.load('/textures/rooftexture.jpeg');
+const roofGeometry = new THREE.ConeGeometry(13, 7, 4);
+const roofMaterial = new THREE.MeshStandardMaterial({map:roofTexture});
+roofTexture.wrapS = THREE.MirroredRepeatWrapping;
+roofTexture.wrapT = THREE.MirroredRepeatWrapping;
+roofTexture.repeat.set(5, 5);
+const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+roof.rotation.y = -Math.PI / 4; 
+roof.position.y = 8.9;
+roof.position.z=-2;
+scene.add(roof);
 
 
-// const roofGeometry2 = new THREE.ConeGeometry(4, 3, 4);
-// // const roofMaterial2= new THREE.MeshStandardMaterial({map:roofTexture});
-// const roof2=new THREE.Mesh(roofGeometry2,roofMaterial);
-// roof2.rotation.y = -Math.PI / 4; 
-// roof2.position.y = 6.9;
-// roof2.position.z=4.5;
-// roof2.position.x=-11.8;
+const roofGeometry2 = new THREE.ConeGeometry(4, 3, 4);
+// const roofMaterial2= new THREE.MeshStandardMaterial({map:roofTexture});
+const roof2=new THREE.Mesh(roofGeometry2,roofMaterial);
+roof2.rotation.y = -Math.PI / 4; 
+roof2.position.y = 6.9;
+roof2.position.z=4.5;
+roof2.position.x=-11.8;
 
-// scene.add(roof2);
-// //const textureLoader = new THREE.TextureLoader();
-// const wallTexture=textureLoader.load('/textures/wallTexture2.jpg');
-// textureLoader.load('/textures/woodflor.avif', function (texture) {
-//     loader.load('models/room/room.gltf', (gltf) => {
-//       const room = gltf.scene;
-//       console.log('Model loaded:', room);
+scene.add(roof2);
+//const textureLoader = new THREE.TextureLoader();
+const wallTexture=textureLoader.load('/textures/wallTexture2.jpg');
+textureLoader.load('/textures/woodflor.avif', function (texture) {
+    loader.load('models/room/room.gltf', (gltf) => {
+      const room = gltf.scene;
+      console.log('Model loaded:', room);
 
-//       room.traverse((child) => {
-//         // console.log(child.name);
-//         if (child.isMesh) {
-//           child.castShadow = true;
-//           child.receiveShadow = true;
+      room.traverse((child) => {
+        // console.log(child.name);
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
   
-//           if (child.name === 'Object_56') {
-//             console.log('Floor found');
-//             child.material = new THREE.MeshPhongMaterial({ map: texture, shininess:1000});
-//             texture.wrapS = THREE.MirroredRepeatWrapping;
-//             texture.wrapT = THREE.MirroredRepeatWrapping;
-//             texture.repeat.set( 1, 1 );
+          if (child.name === 'Object_56') {
+            console.log('Floor found');
+            child.material = new THREE.MeshPhongMaterial({ map: texture, shininess:1000});
+            texture.wrapS = THREE.MirroredRepeatWrapping;
+            texture.wrapT = THREE.MirroredRepeatWrapping;
+            texture.repeat.set( 1, 1 );
 
-//           } else {
-//             console.log('Floor not found');
+          } else {
+            console.log('Floor not found');
            
-//           }
+          }
 
-//           if(child.name=='Object_3'){
-//             console.log('Wall found');
-//             child.material=new THREE.MeshStandardMaterial({color:0xFFFFFF});
+          if(child.name=='Object_3'){
+            console.log('Wall found');
+            child.material=new THREE.MeshStandardMaterial({color:0xFFFFFF});
 
-//                 }
-//                 }
-//             });
-//             room.scale.set(1,2,1);
-//         scene.add(room);
-//     }, undefined, function (error) {
-//       console.error('An error happened:', error);
-//     });
-//   }, undefined, function (error) {
-//     console.log('An error occurred while loading the texture:', error);
-//   });
+                }
+                }
+            });
+            room.scale.set(1,2,1);
+        scene.add(room);
+    }, undefined, function (error) {
+      console.error('An error happened:', error);
+    });
+  }, undefined, function (error) {
+    console.log('An error occurred while loading the texture:', error);
+  });
 
 
-//   const planeGeometry = new THREE.PlaneGeometry(10, 20); 
-//   const planeMaterial = new THREE.MeshStandardMaterial({ 
-//   color: 0xFFFFFF, 
-//   side: THREE.DoubleSide
-// });
+  const planeGeometry = new THREE.PlaneGeometry(10, 20); 
+  const planeMaterial = new THREE.MeshStandardMaterial({ 
+  color: 0xFFFFFF, 
+  side: THREE.DoubleSide
+});
 
-// const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-// plane.rotation.x = -Math.PI / 2;
-// plane.scale.set(1.55, 0.9, 1.2);
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+plane.rotation.x = -Math.PI / 2;
+plane.scale.set(1.55, 0.9, 1.2);
 
-// plane.position.set(0.3, 5.45, -1);
+plane.position.set(0.3, 5.45, -1);
 
-// scene.add(plane);
-// roomAndFurnitureGroup.add(planeGeometry);
+scene.add(plane);
+roomAndFurnitureGroup.add(planeGeometry);
 
 
 
