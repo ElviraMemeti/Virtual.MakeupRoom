@@ -49,7 +49,32 @@ scene.add( rectLight1 );
 
 //Models
 
+
+
 const loader = new GLTFLoader();
+
+const roofTexture=textureLoader.load('/textures/rooftexture.jpeg');
+const roofGeometry = new THREE.ConeGeometry(13, 7, 4);
+const roofMaterial = new THREE.MeshStandardMaterial({map:roofTexture});
+roofTexture.wrapS = THREE.MirroredRepeatWrapping;
+roofTexture.wrapT = THREE.MirroredRepeatWrapping;
+roofTexture.repeat.set(5, 5);
+const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+roof.rotation.y = -Math.PI / 4; 
+roof.position.y = 8.9;
+roof.position.z=-2;
+scene.add(roof);
+
+
+const roofGeometry2 = new THREE.ConeGeometry(4, 3, 4);
+// const roofMaterial2= new THREE.MeshStandardMaterial({map:roofTexture});
+const roof2=new THREE.Mesh(roofGeometry2,roofMaterial);
+roof2.rotation.y = -Math.PI / 4; 
+roof2.position.y = 6.9;
+roof2.position.z=4.5;
+roof2.position.x=-11.8;
+
+scene.add(roof2);
 //const textureLoader = new THREE.TextureLoader();
 const wallTexture=textureLoader.load('/textures/wallTexture2.jpg');
 textureLoader.load('/textures/woodflor.avif', function (texture) {
@@ -92,20 +117,20 @@ textureLoader.load('/textures/woodflor.avif', function (texture) {
   });
 
 
-//   const planeGeometry = new THREE.PlaneGeometry(10, 20); 
-//   const planeMaterial = new THREE.MeshStandardMaterial({ 
-//   color: 0xFFFFFF, 
-//   side: THREE.DoubleSide
-// });
+  const planeGeometry = new THREE.PlaneGeometry(10, 20); 
+  const planeMaterial = new THREE.MeshStandardMaterial({ 
+  color: 0xFFFFFF, 
+  side: THREE.DoubleSide
+});
 
-// const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-// plane.rotation.x = -Math.PI / 2;
-// plane.scale.set(1.55, 0.9, 1.2);
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+plane.rotation.x = -Math.PI / 2;
+plane.scale.set(1.55, 0.9, 1.2);
 
-// plane.position.set(0.3, 5.45, -1);
+plane.position.set(0.3, 5.45, -1);
 
-// scene.add(plane);
-// roomAndFurnitureGroup.add(planeGeometry);
+scene.add(plane);
+roomAndFurnitureGroup.add(planeGeometry);
 
 
 
@@ -122,7 +147,7 @@ const LavamanosTexture = textureLoader.load('textures/brown.jpg')
 
     loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
         const longmirror = gltf.scene;
-        longmirror.scale.set(1.3, 0.92, 3);
+        longmirror.scale.set(1.5, 2, 3);
         longmirror.rotation.y = Math.PI / -2;
         longmirror.traverse((child) => {
             if (child.isMesh && child.name === 'Listones') {
@@ -155,14 +180,14 @@ const LavamanosTexture = textureLoader.load('textures/brown.jpg')
 
         });
         
-        longmirror.position.set(7.74, 1.3, -3);
+        longmirror.position.set(7.74, 2.3, -3);
         roomAndFurnitureGroup.add(longmirror);
     });
 
 
     loader.load('models/mirror/makeupmirror.gltf', (gltf) => {
       const longmirror = gltf.scene;
-      longmirror.scale.set(1.3, 0.92, 3);
+        longmirror.scale.set(1.5, 2, 3);
       longmirror.rotation.y = Math.PI / -2;
       longmirror.traverse((child) => {
           if (child.isMesh && child.name === 'Listones') {
@@ -192,7 +217,7 @@ const LavamanosTexture = textureLoader.load('textures/brown.jpg')
 
       });
       
-      longmirror.position.set(7.74, 1.3, 3);
+      longmirror.position.set(7.8, 2.3, 3);
       roomAndFurnitureGroup.add(longmirror);
   });
 
@@ -240,14 +265,52 @@ loader.load('models/chair/chair.gltf', (gltf) => {
 });
 
 
+loader.load('models/chair/chair.gltf', (gltf) => {
+  const chair = gltf.scene;
+  chair.scale.set(1.5, 1.5, 1.5);
+  chair.rotation.y = Math.PI / 2;
 
+  chair.position.set(5.8, 0, -4.5);
+  chair.traverse((child) => {
+    if (child.isMesh) {
+      const material = new THREE.MeshStandardMaterial({ map: brownTexture });
+      chair.traverse((child) => {
+        if (child.isMesh) {
+    
+        child.material = material;
+         
+        }
+      });
+    }
+  });
+
+  roomAndFurnitureGroup.add(chair);
+});
+loader.load('models/chair/chair.gltf', (gltf) => {
+  const chair = gltf.scene;
+  chair.scale.set(1.5, 1.5, 1.5);
+  chair.rotation.y = Math.PI / 2;
+
+  chair.position.set(5.8, 0, 2);
+
+  const material = new THREE.MeshStandardMaterial({ map: brownTexture });
+  chair.traverse((child) => {
+    if (child.isMesh) {
+
+    child.material = material;
+     
+    }
+  });
+
+  roomAndFurnitureGroup.add(chair);
+});
 
 loader.load('models/chair/chair.gltf', (gltf) => {
   const chair = gltf.scene;
   chair.scale.set(1.5, 1.5, 1.5);
   chair.rotation.y = Math.PI / 2;
 
-  chair.position.set(5.8, 0, 3);
+  chair.position.set(5.8, 0, 4);
 
   const material = new THREE.MeshStandardMaterial({ map: brownTexture });
   chair.traverse((child) => {
