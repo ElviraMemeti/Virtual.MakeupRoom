@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "three": "^0.161.0"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^23.1.1"
   }
 }
