@@ -92,20 +92,20 @@ textureLoader.load('/textures/woodflor.avif', function (texture) {
   });
 
 
-  const planeGeometry = new THREE.PlaneGeometry(10, 20); 
-  const planeMaterial = new THREE.MeshStandardMaterial({ 
-  color: 0xFFFFFF, 
-  side: THREE.DoubleSide
-});
+//   const planeGeometry = new THREE.PlaneGeometry(10, 20); 
+//   const planeMaterial = new THREE.MeshStandardMaterial({ 
+//   color: 0xFFFFFF, 
+//   side: THREE.DoubleSide
+// });
 
-const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-plane.rotation.x = -Math.PI / 2;
-plane.scale.set(1.55, 0.9, 1.2);
+// const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+// plane.rotation.x = -Math.PI / 2;
+// plane.scale.set(1.55, 0.9, 1.2);
 
-plane.position.set(0.3, 5.45, -1);
+// plane.position.set(0.3, 5.45, -1);
 
-scene.add(plane);
-roomAndFurnitureGroup.add(planeGeometry);
+// scene.add(plane);
+// roomAndFurnitureGroup.add(planeGeometry);
 
 
 
@@ -196,7 +196,22 @@ const LavamanosTexture = textureLoader.load('textures/brown.jpg')
       roomAndFurnitureGroup.add(longmirror);
   });
 
+//---------------makeup on table----------------
+loader.load('models/makeupkit/makeupkit.gltf', (gltf) => {
+  const makeupkit = gltf.scene;
+  makeupkit.scale.set(0.14, 0.14, 0.14);
+  makeupkit.rotation.y = (-Math.PI/2);
+  makeupkit.position.set(7, 1.3, -2.5);
+  roomAndFurnitureGroup.add(makeupkit); 
+});
 
+loader.load('models/makeupkit/makeupkit.gltf', (gltf) => {
+  const makeupkit = gltf.scene;
+  makeupkit.scale.set(0.14, 0.14, 0.14);
+  makeupkit.rotation.y = (-Math.PI/2);
+  makeupkit.position.set(7, 1.3, 4);
+  roomAndFurnitureGroup.add(makeupkit); 
+});
 
 
 //----------------------CODE FOR CHAIR-----------------------------------------
@@ -688,6 +703,13 @@ loader.load('models/makeup/lipstick1/lipstick1.gltf', (gltf) => {
 
 
 
+
+
+
+
+
+
+
 //-------------------------MAKEUP ARTIST----------------------
 
 loader.load('models/makeupArtist/makeupArtist.gltf', (gltf) => {
@@ -696,6 +718,15 @@ loader.load('models/makeupArtist/makeupArtist.gltf', (gltf) => {
   makeupArtist.position.set(-6.7, 0, 3.5);
   makeupArtist.rotation.y = (Math.PI/2);
   scene.add(makeupArtist); 
+});
+
+//------------------------book
+loader.load('models/book/book.gltf', (gltf) => {
+  const book = gltf.scene;
+  book.scale.set(0.3, 0.3, 0.3);
+  book.position.set(0.5, 0.4, -4.8);
+  book.rotation.y = (Math.PI/2);
+  scene.add(book); 
 });
 
 
